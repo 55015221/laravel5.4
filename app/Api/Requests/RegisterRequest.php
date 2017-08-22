@@ -29,7 +29,7 @@ class RegisterRequest extends ApiRequest
     {
         return [
             'username' => 'required|unique:users|max:32|min:3|alpha_dash',
-            'password' => 'required|min:6',
+            'password' => 'required|min:3',
             'email'    => 'required',
         ];
     }

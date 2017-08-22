@@ -30,7 +30,7 @@ class LoginRequest extends ApiRequest
     {
         return [
             'username' => 'required|max:32|min:3|alpha_dash',
-            'password' => 'required|min:6',
+            'password' => 'required|min:3',
         ];
     }
 
