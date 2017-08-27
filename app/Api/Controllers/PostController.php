@@ -11,7 +11,7 @@ class PostController extends BaseController
     {
 
         $user = $this->user();
-
+        return $this->responseData($user);
         //当前用户 拥有的角色
         dd($user->roles()->allRelatedIds());
         dd($user);

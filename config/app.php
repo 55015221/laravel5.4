@@ -171,6 +171,7 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...

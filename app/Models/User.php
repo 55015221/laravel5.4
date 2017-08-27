@@ -29,6 +29,11 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    public static $userStatus = [
+        1 => '正常',
+        2 => '禁用',
+    ];
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
