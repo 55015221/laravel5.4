@@ -10,8 +10,10 @@ namespace App\Api\Controllers;
 
 
 use App\Models\AccessRecord;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class AccessRecordController extends BaseController
 {
@@ -19,6 +21,8 @@ class AccessRecordController extends BaseController
     public function index(Request $request)
     {
         $pageSize = $request->input('page_size', PAGE_SIZE);
+
+        $code = trim($request->input('code'));
 
         /**
          * 查询字段
@@ -28,11 +32,16 @@ class AccessRecordController extends BaseController
             'users.username'
         ];
 
+//        DB::connection()->enableQueryLog();
         /* @var $paginate LengthAwarePaginator */
         $paginate = AccessRecord::leftJoin('users', 'users.id', '=', 'access_records.uid')
+            ->when($code, function (Builder $query) use ($code) {
+                $query->where('access_records.code', $code);
+            })
             ->orderBy('access_records.id', 'desc')
             ->paginate($pageSize, $columns);
 
+//        logger('22',DB::getQueryLog());
         $accessRecords = $paginate->getCollection();
 
         $accessRecords->each(function (AccessRecord $accessRecord) {
