@@ -47,11 +47,10 @@ $api->version('v1', function (Router $api) {
          *
          * 本组路由为需要认证才能访问的路由
          */
-//        $api->group(['middleware' => ['jwt.user.auth']], function (Router $api) {
-        $api->group([], function (Router $api) {
+        $api->group(['middleware' => ['jwt.user.auth']], function (Router $api) {
             //获取用户的信息
             $api->get('/users', 'UserController@index');
-            $api->get('/users/{uid}', 'UserController@show');
+            $api->get('/users/show', 'UserController@show');
             //注销当前登录用户
             $api->get('/logout', 'AuthController@logout');
 

@@ -39,7 +39,7 @@ class CheckAuthenticate
              * 验证登录
              */
             if (!Auth::guard($this->guard)->check()) {
-                return $this->responseError(ERROR_NOT_LOGIN, '尚未登录或登录状态已超时');
+                return $this->responseError(ERROR_NOT_LOGIN, '尚未登录或登录状态已超时,请重新登录');
             }
 
             /**
@@ -47,7 +47,7 @@ class CheckAuthenticate
              */
             $actionName = $request->route()->getActionName();
             if (!$request->user($this->guard)->can($actionName)) {
-                return $this->responseError(ERROR_NO_PERMIT, '无权限访问');
+//                return $this->responseError(ERROR_NO_PERMIT, '你没有权限访问，请联系管理员');
             }
 
         } catch (TokenExpiredException $e) {
