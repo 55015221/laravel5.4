@@ -20,7 +20,7 @@ class UserController extends BaseController
     {
         $pageSize = $request->input('page_size', PAGE_SIZE);
 
-        $id = $request->input('id');
+        $uid = $request->input('uid');
         $username = $request->input('username');
         $email = $request->input('email');
         $dateStart = $request->input('dateStart');
@@ -35,8 +35,8 @@ class UserController extends BaseController
 
 //        DB::connection()->enableQueryLog();
         /* @var $paginate LengthAwarePaginator */
-        $paginate = User::when($id, function (Builder $query) use ($id) {
-            $query->where('id', $id);
+        $paginate = User::when($uid, function (Builder $query) use ($uid) {
+            $query->where('id', $uid);
         })->when($username, function (Builder $query) use ($username) {
             $query->where('username', 'like', "%{$username}%");
         })->when($email, function (Builder $query) use ($email) {

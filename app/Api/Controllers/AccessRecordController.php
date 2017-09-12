@@ -23,6 +23,7 @@ class AccessRecordController extends BaseController
         $pageSize = $request->input('page_size', PAGE_SIZE);
 
         $code = trim($request->input('code'));
+        $url = trim($request->input('url'));
 
         /**
          * 查询字段
@@ -37,6 +38,9 @@ class AccessRecordController extends BaseController
         $paginate = AccessRecord::leftJoin('users', 'users.id', '=', 'access_records.uid')
             ->when($code, function (Builder $query) use ($code) {
                 $query->where('access_records.code', $code);
+            })
+            ->when($url, function (Builder $query) use ($url) {
+                $query->where('access_records.url', 'like', "%{$url}%");
             })
             ->orderBy('access_records.id', 'desc')
             ->paginate($pageSize, $columns);
