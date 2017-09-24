@@ -18,6 +18,11 @@ use Illuminate\Support\Facades\DB;
 class AccessRecordController extends BaseController
 {
 
+    /**
+     * 获取访问记录列表
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(Request $request)
     {
         $pageSize = $request->input('page_size', PAGE_SIZE);
@@ -33,7 +38,6 @@ class AccessRecordController extends BaseController
             'users.username'
         ];
 
-//        DB::connection()->enableQueryLog();
         /* @var $paginate LengthAwarePaginator */
         $paginate = AccessRecord::leftJoin('users', 'users.id', '=', 'access_records.uid')
             ->when($code, function (Builder $query) use ($code) {
@@ -45,15 +49,31 @@ class AccessRecordController extends BaseController
             ->orderBy('access_records.id', 'desc')
             ->paginate($pageSize, $columns);
 
-//        logger('22',DB::getQueryLog());
         $accessRecords = $paginate->getCollection();
-
-        $accessRecords->each(function (AccessRecord $accessRecord) {
+        $accessRecords->each(function (AccessRecord &$accessRecord) {
             //格式化数据
-
         });
 
+        $paginate->setCollection($accessRecords);
+
         return $this->responseData($paginate);
+    }
+
+    /**
+     * 获取记录详情
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function detail(Request $request, $id)
+    {
+        /**
+         * @var $accessRecord AccessRecord
+         */
+        $accessRecord = AccessRecord::where('id', $id)->first();
+
+        $accessRecord->response = json_decode($accessRecord->response,true);
+        return $this->responseData($accessRecord);
     }
 
 }

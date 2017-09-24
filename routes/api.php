@@ -52,7 +52,7 @@ $api->version('v1', function (Router $api) {
             $api->get('/users', 'UserController@index');
             $api->get('/users/show', 'UserController@show');
             //注销当前登录用户
-            $api->get('/logout', 'AuthController@logout');
+            $api->post('/logout', 'AuthController@logout');
 
 
             $api->get('/posts', 'PostController@index');
@@ -60,8 +60,9 @@ $api->version('v1', function (Router $api) {
             $api->get('/posts/{id}', 'PostController@show');
             $api->patch('/posts/{id}', 'PostController@update');
 
-
+            //访问记录
             $api->get('/access_records', 'AccessRecordController@index');
+            $api->get('/access_records/{id}', 'AccessRecordController@detail');
         });
     });
 
