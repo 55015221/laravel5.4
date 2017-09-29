@@ -38,6 +38,7 @@ $api->version('v1', function (Router $api) {
             $api->get('check_sms_verify_code', 'AuthController@checkSmsVerifyCode');
             //重置密码
             $api->post('reset_password', 'AuthController@resetPassword');
+
         });
 
         /**
@@ -63,6 +64,9 @@ $api->version('v1', function (Router $api) {
             //访问记录
             $api->get('/access_records', 'AccessRecordController@index');
             $api->get('/access_records/{id}', 'AccessRecordController@detail');
+
+            //角色管理
+            $api->get('/roles', 'RoleController@index'); //角色列表
         });
     });
 
