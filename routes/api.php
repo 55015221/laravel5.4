@@ -65,8 +65,21 @@ $api->version('v1', function (Router $api) {
             $api->get('/access_records', 'AccessRecordController@index');
             $api->get('/access_records/{id}', 'AccessRecordController@detail');
 
-            //角色管理
+            /**
+             * 角色管理
+             */
             $api->get('/roles', 'RoleController@index'); //角色列表
+            $api->post('/roles', 'RoleController@create'); //创建角色
+            $api->patch('/roles/{id}', 'RoleController@update'); //修改角色
+            $api->get('/roles/{id}', 'RoleController@show'); //查看角色
+
+            /**
+             * 权限控制管理
+             */
+            $api->get('/permissions', 'PermissionController@index'); //权限控制列表
+            $api->post('/permissions', 'PermissionController@create'); //创建权限控制
+            $api->patch('/permissions/{id}', 'PermissionController@update'); //修改权限控制
+            $api->get('/permissions/{id}', 'PermissionController@show'); //查看权限控制
         });
     });
 

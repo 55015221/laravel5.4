@@ -1,6 +1,6 @@
 <?php
 /**
- * 角色管理
+ * 权限控制管理
  *
  * @author Bily
  * @date 2017-8-7 11:40:20
@@ -8,19 +8,20 @@
 
 namespace App\Api\Controllers;
 
-use App\Api\Requests\RoleCreateRequest;
-use App\Api\Requests\RoleUpdateRequest;
+use App\Api\Requests\PermissionCreateRequest;
+use App\Api\Requests\PermissionUpdateRequest;
+use App\Models\Permission;
 use App\Models\Role;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-class RoleController extends BaseController
+class PermissionController extends BaseController
 {
 
     /**
-     * 角色列表
+     * 权限控制列表
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -35,7 +36,7 @@ class RoleController extends BaseController
         $dateEnd = $request->input('dateEnd');
 
         /* @var $paginate LengthAwarePaginator */
-        $paginate = Role::when($name, function (Builder $query) use ($name) {
+        $paginate = Permission::when($name, function (Builder $query) use ($name) {
             $query->where('name', 'like', "%{$name}%");
         })->when($displayName, function (Builder $query) use ($displayName) {
             $query->where('display_name', 'like', "%{$displayName}%");
@@ -58,34 +59,34 @@ class RoleController extends BaseController
     }
 
     /**
-     * 查看角色
+     * 查看权限控制
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        /* @var $role Role */
-        $role = Role::find($id);
+        /* @var $permission Permission */
+        $permission = Permission::find($id);
 
-        if (!$role) {
-            return $this->responseError(ERROR_UNKNOWN, '该角色不存在');
+        if (!$permission) {
+            return $this->responseError(ERROR_UNKNOWN, '该权限控制不存在');
         }
 
-        return $this->responseData($role);
+        return $this->responseData($permission);
     }
 
     /**
-     * 创建角色
-     * @param RoleCreateRequest $roleCreateRequest
+     * 创建权限控制
+     * @param PermissionCreateRequest $permissionCreateRequest
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create(RoleCreateRequest $roleCreateRequest)
+    public function create(PermissionCreateRequest $permissionCreateRequest)
     {
         try {
-            $role = $roleCreateRequest->only(['name', 'description']);
-            $role['display_name'] = $roleCreateRequest->input('displayName');
+            $permission = $permissionCreateRequest->only(['name', 'description']);
+            $permission['display_name'] = $permissionCreateRequest->input('displayName');
 
-            Role::save($role);
+            Permission::save($permission);
 
             return $this->responseSuccess();
         } catch (Exception $e) {
@@ -94,24 +95,25 @@ class RoleController extends BaseController
     }
 
     /**
-     * 修改角色
-     * @param RoleUpdateRequest $roleUpdateRequest
-     * @param int $id
+     * 修改权限控制
+     * @param PermissionUpdateRequest $permissionUpdateRequest
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(RoleUpdateRequest $roleUpdateRequest, $id)
+    public function update(PermissionUpdateRequest $permissionUpdateRequest, $id)
     {
         try {
-            $data = $roleUpdateRequest->only(['name', 'description']);
-            $data['display_name'] = $roleUpdateRequest->input('displayName');
+            /* @var $permission Permission */
+            $permission = Permission::find($id);
 
-            /* @var $role Role */
-            $role = Role::find($id);
-
-            if (!$role) {
-                return $this->responseError(ERROR_UNKNOWN, '该角色不存在');
+            if (!$permission) {
+                return $this->responseError(ERROR_UNKNOWN, '该权限控制不存在');
             }
-            $role->update($data);
+
+            $data = $permissionUpdateRequest->only(['name', 'description']);
+            $data['display_name'] = $permissionUpdateRequest->input('displayName');
+
+            $permission->save($data);
 
             return $this->responseSuccess();
         } catch (Exception $e) {
