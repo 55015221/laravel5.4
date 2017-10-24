@@ -80,6 +80,11 @@ $api->version('v1', function (Router $api) {
             $api->post('/permissions', 'PermissionController@create'); //创建权限控制
             $api->patch('/permissions/{id}', 'PermissionController@update'); //修改权限控制
             $api->get('/permissions/{id}', 'PermissionController@show'); //查看权限控制
+
+            /**
+             * 图片
+             */
+            $api->get('/images', 'ImageController@index'); //图片列表
         });
     });
 
