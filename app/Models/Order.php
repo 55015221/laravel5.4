@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+
+    protected $connection = 'mysql_163';
+
+    protected $table = 'lxj_r_lxd_rong_order_info';
     /**
      * 不可被批量赋值的属性。
      * @var array

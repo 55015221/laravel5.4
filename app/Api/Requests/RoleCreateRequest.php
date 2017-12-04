@@ -29,7 +29,7 @@ class RoleCreateRequest extends ApiRequest
     public function rules()
     {
         return [
-            'name'        => 'required|max:32|min:3|alpha_dash',
+            'name'        => 'required|max:32|min:3',
             'displayName' => 'required|min:3',
             'description' => 'min:3',
         ];

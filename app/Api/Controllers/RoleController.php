@@ -52,6 +52,7 @@ class RoleController extends BaseController
         $roles->each(function (Role &$role) {
             //格式化数据
             $role->displayName = $role->display_name;
+            unset($role->display_name);
         });
 
         return $this->responseData($paginate);
@@ -82,10 +83,11 @@ class RoleController extends BaseController
     public function create(RoleCreateRequest $roleCreateRequest)
     {
         try {
-            $role = $roleCreateRequest->only(['name', 'description']);
-            $role['display_name'] = $roleCreateRequest->input('displayName');
+            $data = $roleCreateRequest->only(['name', 'description']);
+            $data['display_name'] = $roleCreateRequest->input('displayName');
 
-            Role::save($role);
+            $role = new Role();
+            $role->create($data);
 
             return $this->responseSuccess();
         } catch (Exception $e) {
@@ -102,15 +104,14 @@ class RoleController extends BaseController
     public function update(RoleUpdateRequest $roleUpdateRequest, $id)
     {
         try {
-            $data = $roleUpdateRequest->only(['name', 'description']);
-            $data['display_name'] = $roleUpdateRequest->input('displayName');
-
             /* @var $role Role */
             $role = Role::find($id);
-
             if (!$role) {
                 return $this->responseError(ERROR_UNKNOWN, '该角色不存在');
             }
+            $data = $roleUpdateRequest->only(['name', 'description']);
+            $data['display_name'] = $roleUpdateRequest->input('displayName');
+
             $role->update($data);
 
             return $this->responseSuccess();

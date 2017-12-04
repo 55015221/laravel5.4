@@ -11,7 +11,6 @@ namespace App\Api\Controllers;
 use App\Api\Requests\PermissionCreateRequest;
 use App\Api\Requests\PermissionUpdateRequest;
 use App\Models\Permission;
-use App\Models\Role;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -48,11 +47,12 @@ class PermissionController extends BaseController
             $query->where('created_at', '<=', $dateEnd);
         })
             ->paginate();
-        $roles = $paginate->getCollection();
+        $permissions = $paginate->getCollection();
 
-        $roles->each(function (Role &$role) {
+        $permissions->each(function (Permission &$permission) {
             //格式化数据
-            $role->displayName = $role->display_name;
+            $permission->displayName = $permission->display_name;
+            unset($permission->display_name);
         });
 
         return $this->responseData($paginate);
@@ -83,10 +83,11 @@ class PermissionController extends BaseController
     public function create(PermissionCreateRequest $permissionCreateRequest)
     {
         try {
-            $permission = $permissionCreateRequest->only(['name', 'description']);
-            $permission['display_name'] = $permissionCreateRequest->input('displayName');
+            $data = $permissionCreateRequest->only(['name', 'description']);
+            $data['display_name'] = $permissionCreateRequest->input('displayName');
 
-            Permission::save($permission);
+            $permission = new Permission();
+            $permission->create($data);
 
             return $this->responseSuccess();
         } catch (Exception $e) {
@@ -113,7 +114,7 @@ class PermissionController extends BaseController
             $data = $permissionUpdateRequest->only(['name', 'description']);
             $data['display_name'] = $permissionUpdateRequest->input('displayName');
 
-            $permission->save($data);
+            $permission->update($data);
 
             return $this->responseSuccess();
         } catch (Exception $e) {

@@ -2,6 +2,7 @@
 
 namespace App\Api\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -69,6 +70,10 @@ class UserController extends BaseController
     public function show(Request $request)
     {
         $user = $this->user();
+        dd($user->hasRole('owner'));
+        $owner = Role::where('name','owner')->first();
+        dd($owner->permission);
+        dd($user->roles);
         if ($user) {
             return $this->responseData($user);
         }

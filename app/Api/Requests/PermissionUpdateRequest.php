@@ -1,6 +1,6 @@
 <?php
 /**
- * 创建角色请求类
+ * 修改权限请求类
  *
  * @author Bily
  * @date 2017-8-7 11:40:20
@@ -29,7 +29,7 @@ class PermissionUpdateRequest extends ApiRequest
     public function rules()
     {
         return [
-            'name'        => 'required|max:32|min:3|alpha_dash',
+            'name'        => 'required|max:32|min:3',
             'displayName' => 'required|min:3',
             'description' => 'min:3',
         ];

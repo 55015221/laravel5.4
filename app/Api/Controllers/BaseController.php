@@ -26,7 +26,6 @@ class BaseController extends Controller
     {
         $this->middleware('throttle:60,1');     //一分钟最多尝试60次
         $this->middleware('access.api');     //访问记录 延时10秒
-
     }
 
     /**
