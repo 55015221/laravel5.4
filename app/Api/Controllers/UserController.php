@@ -2,6 +2,7 @@
 
 namespace App\Api\Controllers;
 
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -70,14 +71,61 @@ class UserController extends BaseController
     public function show(Request $request)
     {
         $user = $this->user();
-        dd($user->hasRole('owner'));
-        $owner = Role::where('name','owner')->first();
-        dd($owner->permission);
-        dd($user->roles);
         if ($user) {
             return $this->responseData($user);
         }
         return $this->responseError(1001, '用户不存在');
+    }
+
+    /**
+     * 测试
+     */
+    public function test()
+    {
+        /* @var $user User */
+        $user = User::where('username', 'admin')->first();
+        //用户拥有的角色
+//        dd($user->roles);
+//        给用户分配角色
+//        dd($user->detachRole(1));
+//        删除角色的权限
+//        dd($user->attachRole(1));
+
+//        $user->roles()->attach(1);
+
+        list($validate, $allValidations) = $user->ability(
+            Role::all()->toArray(),
+            Permission::all()->toArray(),
+            [
+                'validate_all' => true,
+                'return_type'  => 'both'
+            ]
+        );
+
+
+        $role = Role::where('name', 'admin')->first();
+//        某个角色拥有的权限
+//        dd($role->perms);
+
+//        分配权限给角色
+//        dd($role->attachPermission(1));
+//        批量分配权限给角色（注意：是重新分配，之前的都会去掉 不是追加）
+//        dd($role->perms()->sync([5,6,7,8,9,10,11,12]));
+//        删掉角色中的权限
+//        dd($role->detachPermission(1));
+
+//        dd($role->users()->sync([])); // 删除关联数据
+//        dd($role->perms()->sync([])); // 删除关联数据
+
+
+//        判断用户是否属于某个用户组:
+//        $user->hasRole("Owner");    // false
+//        $user->hasRole("Admin");    // true
+//        判断用户是否拥有某个权限(通过用户组):
+//        $user->can("manage_posts"); // true
+//        $user->can("manage_users"); // false
+
+
     }
 
 }

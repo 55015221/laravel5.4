@@ -42,6 +42,9 @@ $api->version('v1', function (Router $api) {
             //重置密码
             $api->post('reset_password', 'AuthController@resetPassword');
 
+
+            $api->get('test', 'UserController@test');
+
         });
 
         /**
