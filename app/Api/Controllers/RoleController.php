@@ -28,6 +28,7 @@ class RoleController extends BaseController
     {
         $user = $this->user();
 
+        $id = $request->input('id');
         $name = $request->input('name');
         $displayName = $request->input('displayName');
         $description = $request->input('description');
@@ -35,7 +36,9 @@ class RoleController extends BaseController
         $dateEnd = $request->input('dateEnd');
 
         /* @var $paginate LengthAwarePaginator */
-        $paginate = Role::when($name, function (Builder $query) use ($name) {
+        $paginate = Role::when($id, function (Builder $query) use ($id) {
+            $query->where('id', $id);
+        })->when($name, function (Builder $query) use ($name) {
             $query->where('name', 'like', "%{$name}%");
         })->when($displayName, function (Builder $query) use ($displayName) {
             $query->where('display_name', 'like', "%{$displayName}%");

@@ -35,7 +35,6 @@ class UserController extends BaseController
             '*',
         ];
 
-//        DB::connection()->enableQueryLog();
         /* @var $paginate LengthAwarePaginator */
         $paginate = User::when($uid, function (Builder $query) use ($uid) {
             $query->where('id', $uid);
@@ -51,7 +50,6 @@ class UserController extends BaseController
             ->orderBy('id', 'desc')
             ->paginate($pageSize, $columns);
 
-//        dd(DB::getQueryLog());
         $accessRecords = $paginate->getCollection();
 
         $accessRecords->each(function (User $user) {

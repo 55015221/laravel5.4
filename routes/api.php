@@ -24,7 +24,7 @@ $api->version('v1', function (Router $api) {
          * 本组路由为不需要认证即可访问的路由
          */
         $api->group([], function (Router $api) {
-            $api->get('orders','OrderController@index');
+
             //用户注册
             $api->post('register', 'AuthController@register');
             //用户登录
@@ -91,6 +91,8 @@ $api->version('v1', function (Router $api) {
              * 图片
              */
             $api->get('/images', 'ImageController@index'); //图片列表
+
+            $api->get('orders','OrderController@index');
 
 
 
