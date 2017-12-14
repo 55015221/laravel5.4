@@ -42,9 +42,9 @@ $api->version('v1', function (Router $api) {
             //重置密码
             $api->post('reset_password', 'AuthController@resetPassword');
 
-
             $api->get('test', 'UserController@test');
 
+            $api->get('/roles/{id}/permissions', 'RoleController@permissions'); //查看角色拥有的权限列表
         });
 
         /**
@@ -79,24 +79,23 @@ $api->version('v1', function (Router $api) {
             $api->patch('/roles/{id}', 'RoleController@update'); //修改角色
             $api->get('/roles/{id}', 'RoleController@show'); //查看角色
 
+            $api->post('/roles-assign', 'PermissionController@assign');  //分配角色给用户
+
             /**
-             * 权限控制管理
+             * 权限管理
              */
             $api->get('/permissions', 'PermissionController@index'); //权限控制列表
             $api->post('/permissions', 'PermissionController@create'); //创建权限控制
             $api->patch('/permissions/{id}', 'PermissionController@update'); //修改权限控制
             $api->get('/permissions/{id}', 'PermissionController@show'); //查看权限控制
+            $api->post('/permissions-assign', 'PermissionController@assign');   //分配权限给角色
 
             /**
              * 图片
              */
             $api->get('/images', 'ImageController@index'); //图片列表
 
-            $api->get('orders','OrderController@index');
-
-
-
-
+            $api->get('orders', 'OrderController@index');
 
 
         });

@@ -8,13 +8,16 @@
 
 namespace App\Api\Controllers;
 
+use App\Api\Requests\RoleAssignRequest;
 use App\Api\Requests\RoleCreateRequest;
 use App\Api\Requests\RoleUpdateRequest;
+use App\Models\Permission;
 use App\Models\Role;
+use App\Models\User;
 use Exception;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends BaseController
 {
@@ -35,7 +38,7 @@ class RoleController extends BaseController
         $dateStart = $request->input('dateStart');
         $dateEnd = $request->input('dateEnd');
 
-        /* @var $paginate LengthAwarePaginator */
+        /* @var $paginate \Illuminate\Pagination\LengthAwarePaginator */
         $paginate = Role::when($id, function (Builder $query) use ($id) {
             $query->where('id', $id);
         })->when($name, function (Builder $query) use ($name) {
@@ -79,6 +82,34 @@ class RoleController extends BaseController
     }
 
     /**
+     * 某个角色拥有的权限
+     * @param $roleId
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function permissions($roleId, Request $request)
+    {
+        $name = $request->input('name');
+        $displayName = $request->input('displayName');
+        $description = $request->input('description');
+//        @todo 不能分页，获取不了分页数据
+//        $role = Role::with(['perms' => function ($query) use ($name, $displayName, $description,&$paginate) {
+//            $paginate = $query->when($name, function (Builder $query) use ($name) {
+//                $query->where('name', 'like', "%{$name}%");
+//            })->when($displayName, function (Builder $query) use ($displayName) {
+//                $query->where('display_name', 'like', "%{$displayName}%");
+//            })->when($description, function (Builder $query) use ($description) {
+//                $query->where('description', 'like', "%{$description}%");
+//            })->paginate();
+//        }])
+//            ->find($roleId);
+
+        $role = Role::find($roleId);
+
+        return $this->responseData($role->perms);
+    }
+
+    /**
      * 创建角色
      * @param RoleCreateRequest $roleCreateRequest
      * @return \Illuminate\Http\JsonResponse
@@ -118,6 +149,32 @@ class RoleController extends BaseController
             $role->update($data);
 
             return $this->responseSuccess();
+        } catch (Exception $e) {
+            return $this->responseError(ERROR_UNKNOWN, $e->getMessage());
+        }
+    }
+
+    /**
+     * 分角色给用户
+     * @param integer $uid 用户ID
+     * @param array $roleId 角色ID 数组
+     * @param RoleAssignRequest $roleAssignRequest
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function assign(RoleAssignRequest $roleAssignRequest)
+    {
+        try {
+            $roleAssignRequest->only(['uid', 'roleId']);
+
+            /* @var $user User */
+            $user = User::find($roleAssignRequest->uid);
+            if (!$user) {
+                return $this->responseError(ERROR_UNKNOWN, '该用户不存在');
+            }
+
+            $user->attachRoles($roleAssignRequest->roleId);
+
+            return $this->responseSuccess('保存成功');
         } catch (Exception $e) {
             return $this->responseError(ERROR_UNKNOWN, $e->getMessage());
         }

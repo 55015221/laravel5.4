@@ -8,13 +8,15 @@
 
 namespace App\Api\Controllers;
 
+use App\Api\Requests\PermissionAssignRequest;
 use App\Api\Requests\PermissionCreateRequest;
 use App\Api\Requests\PermissionUpdateRequest;
 use App\Models\Permission;
+use App\Models\Role;
 use Exception;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use function Sodium\compare;
 
 class PermissionController extends BaseController
 {
@@ -35,7 +37,7 @@ class PermissionController extends BaseController
         $dateStart = $request->input('dateStart');
         $dateEnd = $request->input('dateEnd');
 
-        /* @var $paginate LengthAwarePaginator */
+        /* @var $paginate \Illuminate\Pagination\LengthAwarePaginator */
         $paginate = Permission::when($id, function (Builder $query) use ($id) {
             $query->where('id', $id);
         })->when($name, function (Builder $query) use ($name) {
@@ -120,6 +122,32 @@ class PermissionController extends BaseController
             $permission->update($data);
 
             return $this->responseSuccess();
+        } catch (Exception $e) {
+            return $this->responseError(ERROR_UNKNOWN, $e->getMessage());
+        }
+    }
+
+    /**
+     * 分配权限给角色
+     * @param integer $roleId 角色ID
+     * @param array $permissionId 权限ID 数组
+     * @param PermissionAssignRequest $permissionAssignRequest
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function assign(PermissionAssignRequest $permissionAssignRequest)
+    {
+        try {
+            $permissionAssignRequest->only(['permissionId', 'roleId']);
+
+            /* @var $role Role */
+            $role = Role::find($permissionAssignRequest->roleId);
+            if (!$role) {
+                return $this->responseError(ERROR_UNKNOWN, '该角色不存在');
+            }
+
+            $role->attachPermissions($permissionAssignRequest->permissionId);
+
+            return $this->responseSuccess('保存成功');
         } catch (Exception $e) {
             return $this->responseError(ERROR_UNKNOWN, $e->getMessage());
         }

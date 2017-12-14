@@ -70,9 +70,22 @@ class UserController extends BaseController
     {
         $user = $this->user();
         if ($user) {
-            return $this->responseData($user);
+            list($validate, $allValidations) = $user->ability(
+                Role::pluck('name')->toArray(),
+                Permission::pluck('name')->toArray(),
+                [
+                    'validate_all' => true,
+                    'return_type'  => 'both'
+                ]
+            );
+            return $this->responseData(compact($user,$allValidations));
         }
         return $this->responseError(1001, '用户不存在');
+    }
+
+    public function permission(){
+
+
     }
 
     /**
@@ -91,14 +104,7 @@ class UserController extends BaseController
 
 //        $user->roles()->attach(1);
 
-        list($validate, $allValidations) = $user->ability(
-            Role::all()->toArray(),
-            Permission::all()->toArray(),
-            [
-                'validate_all' => true,
-                'return_type'  => 'both'
-            ]
-        );
+
 
 
         $role = Role::where('name', 'admin')->first();
@@ -106,7 +112,7 @@ class UserController extends BaseController
 //        dd($role->perms);
 
 //        分配权限给角色
-//        dd($role->attachPermission(1));
+//        dd($role->attachPermission(13));
 //        批量分配权限给角色（注意：是重新分配，之前的都会去掉 不是追加）
 //        dd($role->perms()->sync([5,6,7,8,9,10,11,12]));
 //        删掉角色中的权限
