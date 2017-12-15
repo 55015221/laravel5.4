@@ -44,7 +44,7 @@ $api->version('v1', function (Router $api) {
 
             $api->get('test', 'UserController@test');
 
-            $api->get('/roles/{id}/permissions', 'RoleController@permissions'); //查看角色拥有的权限列表
+
         });
 
         /**
@@ -57,10 +57,11 @@ $api->version('v1', function (Router $api) {
         $api->group(['middleware' => ['jwt.user.auth']], function (Router $api) {
             //获取用户的信息
             $api->get('/users', 'UserController@index');
-            $api->get('/users/show', 'UserController@show');
+            $api->get('/users/2', 'UserController@show');
+            $api->get('/users/current', 'UserController@current');
+
             //注销当前登录用户
             $api->post('/logout', 'AuthController@logout');
-
 
             $api->get('/posts', 'PostController@index');
             $api->post('/posts', 'PostController@create');
@@ -78,7 +79,7 @@ $api->version('v1', function (Router $api) {
             $api->post('/roles', 'RoleController@create'); //创建角色
             $api->patch('/roles/{id}', 'RoleController@update'); //修改角色
             $api->get('/roles/{id}', 'RoleController@show'); //查看角色
-
+            $api->get('/roles/{id}/permissions', 'RoleController@permissions'); //查看角色拥有的权限列表
             $api->post('/roles-assign', 'PermissionController@assign');  //分配角色给用户
 
             /**

@@ -62,30 +62,37 @@ class UserController extends BaseController
     }
 
     /**
+     * 获取用户信息
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show($id)
+    {
+        $user = User::find($id);
+
+        return $this->responseData($user);
+    }
+
+    /**
      * 获取用户信息 （只能是自己的信息）
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Request $request)
+    public function current(Request $request)
     {
         $user = $this->user();
-        if ($user) {
-            list($validate, $allValidations) = $user->ability(
-                Role::pluck('name')->toArray(),
-                Permission::pluck('name')->toArray(),
-                [
-                    'validate_all' => true,
-                    'return_type'  => 'both'
-                ]
-            );
-            return $this->responseData(compact($user,$allValidations));
+        if (!$user) {
+            return $this->responseError(ERROR_UNKNOWN, '用户不存在');
         }
-        return $this->responseError(1001, '用户不存在');
-    }
-
-    public function permission(){
-
-
+        list($validate, $allValidations) = $user->ability(
+            Role::pluck('name')->toArray(),
+            Permission::pluck('name')->toArray(),
+            [
+                'validate_all' => true,
+                'return_type'  => 'both'
+            ]
+        );
+        return $this->responseData(compact('user', 'allValidations'));
     }
 
     /**
@@ -94,7 +101,7 @@ class UserController extends BaseController
     public function test()
     {
         /* @var $user User */
-        $user = User::where('username', 'admin')->first();
+//        $user = User::where('username', 'admin')->first();
         //用户拥有的角色
 //        dd($user->roles);
 //        给用户分配角色
@@ -105,14 +112,12 @@ class UserController extends BaseController
 //        $user->roles()->attach(1);
 
 
-
-
         $role = Role::where('name', 'admin')->first();
 //        某个角色拥有的权限
 //        dd($role->perms);
 
 //        分配权限给角色
-//        dd($role->attachPermission(13));
+        dd($role->attachPermissions([17, 18, 19]));
 //        批量分配权限给角色（注意：是重新分配，之前的都会去掉 不是追加）
 //        dd($role->perms()->sync([5,6,7,8,9,10,11,12]));
 //        删掉角色中的权限
