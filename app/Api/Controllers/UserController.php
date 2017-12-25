@@ -36,25 +36,26 @@ class UserController extends BaseController
         ];
 
         /* @var $paginate LengthAwarePaginator */
-        $paginate = User::when($uid, function (Builder $query) use ($uid) {
-            $query->where('id', $uid);
-        })->when($username, function (Builder $query) use ($username) {
-            $query->where('username', 'like', "%{$username}%");
-        })->when($email, function (Builder $query) use ($email) {
-            $query->where('email', 'like', "%{$email}%");
-        })->when($dateStart, function (Builder $query) use ($dateStart) {
-            $query->where('created_at', '>=', $dateStart);
-        })->when($dateEnd, function (Builder $query) use ($dateEnd) {
-            $query->where('created_at', '<=', $dateEnd);
-        })
+        $paginate = User::with('roles')
+            ->when($uid, function (Builder $query) use ($uid) {
+                $query->where('id', $uid);
+            })->when($username, function (Builder $query) use ($username) {
+                $query->where('username', 'like', "%{$username}%");
+            })->when($email, function (Builder $query) use ($email) {
+                $query->where('email', 'like', "%{$email}%");
+            })->when($dateStart, function (Builder $query) use ($dateStart) {
+                $query->where('created_at', '>=', $dateStart);
+            })->when($dateEnd, function (Builder $query) use ($dateEnd) {
+                $query->where('created_at', '<=', $dateEnd);
+            })
             ->orderBy('id', 'desc')
             ->paginate($pageSize, $columns);
 
         $accessRecords = $paginate->getCollection();
-
         $accessRecords->each(function (User $user) {
             //格式化数据
             $user->statusText = User::$userStatus[$user->status];
+            $user->roleString = $user->roles->implode('display_name', ',');
 
         });
 
@@ -70,7 +71,18 @@ class UserController extends BaseController
     {
         $user = User::find($id);
 
-        return $this->responseData($user);
+        if (!$user) {
+            return $this->responseError(ERROR_UNKNOWN, '用户不存在');
+        }
+        list($validate, $allValidations) = $user->ability(
+            Role::pluck('name')->toArray(),
+            Permission::pluck('name')->toArray(),
+            [
+                'validate_all' => true,
+                'return_type'  => 'both'
+            ]
+        );
+        return $this->responseData(compact('user', 'allValidations'));
     }
 
     /**

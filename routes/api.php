@@ -29,6 +29,8 @@ $api->version('v1', function (Router $api) {
             $api->post('register', 'AuthController@register');
             //用户登录
             $api->post('login', 'AuthController@login');
+            //注销当前登录用户
+            $api->post('/logout', 'AuthController@logout');
             //刷新token
             $api->get('refresh_token', 'AuthController@refreshToken');
             //登录状态检查（用于测试）
@@ -56,12 +58,11 @@ $api->version('v1', function (Router $api) {
          */
         $api->group(['middleware' => ['jwt.user.auth']], function (Router $api) {
             //获取用户的信息
+            $api->get('/users/current', 'UserController@current');  //此类路由必须放置前面
             $api->get('/users', 'UserController@index');
-            $api->get('/users/2', 'UserController@show');
-            $api->get('/users/current', 'UserController@current');
+            $api->get('/users/{id}', 'UserController@show');
 
-            //注销当前登录用户
-            $api->post('/logout', 'AuthController@logout');
+
 
             $api->get('/posts', 'PostController@index');
             $api->post('/posts', 'PostController@create');
