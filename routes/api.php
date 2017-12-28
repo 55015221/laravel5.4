@@ -44,6 +44,9 @@ $api->version('v1', function (Router $api) {
             //重置密码
             $api->post('reset_password', 'AuthController@resetPassword');
 
+            //获取用户的信息
+            $api->get('/users/current', 'UserController@current');  //此类路由必须放置前面
+
             $api->get('test', 'UserController@test');
 
 
@@ -57,8 +60,7 @@ $api->version('v1', function (Router $api) {
          * 本组路由为需要认证才能访问的路由
          */
         $api->group(['middleware' => ['jwt.user.auth']], function (Router $api) {
-            //获取用户的信息
-            $api->get('/users/current', 'UserController@current');  //此类路由必须放置前面
+
             $api->get('/users', 'UserController@index');
             $api->get('/users/{id}', 'UserController@show');
 
