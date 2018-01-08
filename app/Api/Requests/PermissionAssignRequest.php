@@ -30,8 +30,7 @@ class PermissionAssignRequest extends ApiRequest
     {
         return [
             'roleId'         => 'required|integer',
-            'permissionId'   => 'required|array',
-            'permissionId.*' => 'required|integer',
+            'permission'   => 'required|array',
         ];
     }
 
@@ -40,9 +39,9 @@ class PermissionAssignRequest extends ApiRequest
         return [
             'roleId.required'        => '角色ID必须填写',
             'roleId.integer'         => '角色ID必须是整型',
-            'permissionId.required'  => '权限ID必须填写',
-            'permissionId.array'     => '权限ID必须是数组',
-            'permissionId.*.integer' => '权限ID必须是整型',
+            'permission.required'  => '权限ID必须填写',
+            'permission.array'     => '权限ID必须是数组',
+            'permission.*.integer' => '权限ID必须是整型',
         ];
     }
 }

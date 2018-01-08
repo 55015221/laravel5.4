@@ -105,8 +105,41 @@ class RoleController extends BaseController
 //            ->find($roleId);
 
         $role = Role::find($roleId);
+        $permissions = Permission::all();
 
-        return $this->responseData($role->perms);
+        $hasPermissions = $role->perms->pluck('id');
+        $permissions->map(function (&$permission) use ($hasPermissions) {
+            $permission->displayName = $permission->display_name;
+            $permission->authority = false;
+            if ($hasPermissions->search($permission->id)) {
+                $permission->authority = true;
+            }
+        });
+
+        return $this->responseData($permissions);
+    }
+
+    /**
+     * 分配权限给某个角色
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function saveRolePermission(Request $request)
+    {
+        try {
+            $roleId = $request->get('id');
+            $permissions = $request->get('permissions');
+
+            //批量分配权限给角色（注意：是重新分配，之前的都会去掉 不是追加）
+            $role = Role::find($roleId);
+
+            dd($permissions);
+
+            $role->perms()->sync([5, 6, 7, 8, 9, 10, 11, 12]);
+            return $this->responseSuccess();
+        } catch (Exception $e) {
+            return $this->responseError(ERROR_UNKNOWN, $e->getMessage());
+        }
     }
 
     /**

@@ -137,7 +137,7 @@ class PermissionController extends BaseController
     public function assign(PermissionAssignRequest $permissionAssignRequest)
     {
         try {
-            $permissionAssignRequest->only(['permissionId', 'roleId']);
+            $permissionAssignRequest->only(['permission', 'roleId']);
 
             /* @var $role Role */
             $role = Role::find($permissionAssignRequest->roleId);
@@ -145,7 +145,12 @@ class PermissionController extends BaseController
                 return $this->responseError(ERROR_UNKNOWN, '该角色不存在');
             }
 
-            $role->attachPermissions($permissionAssignRequest->permissionId);
+            $permissionIds = array_column($permissionAssignRequest->permission, 'id');
+
+            //批量分配权限给角色（注意：是重新分配，之前的都会去掉 不是追加）
+            $role->perms()->sync($permissionIds);
+            //追加分配权限
+            //$role->attachPermissions();
 
             return $this->responseSuccess('保存成功');
         } catch (Exception $e) {
