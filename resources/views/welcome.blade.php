@@ -57,16 +57,7 @@
     </div>
 </div>
 <div class="main-navigation">
-    <div class="main-navigation-content">
-       {{--
-       <ul>
-            <li role=presentation><a href="/" title="首页" target="_blank">首页</a></li>
-            <li role=presentation><a href="/docs/5.5/" title="Laravel中文文档" target="_blank">Laravel中文文档</a></li>
-            <li role=presentation><a href="/docs/2/" title="Lumen中文文档" target="_blank">Lumen中文文档</a></li>
-            <li role=presentation><a href="/specials/4" title="APP下载" target="_blank">APP下载</a></li>
-        </ul>
-        --}}
-    </div>
+
 </div>
 <div class="main-content">
     <div class="title m-b-md" style="font-size: 84px;text-align: center;color: #636b6f;">
@@ -82,25 +73,7 @@
     </div>
 </div>
 <div class="main-footer">
-    <div class="main-footer-content">
-        <ul class="left">
-            <header><h5>最新文章</h5></header>
-            <li><a href="https://phpartisan.cn/news/59.html">LNMP高并发性能优化使AB测试RPS超过500</a><span>2017年12月26日</span></li>
-        </ul>
-        <ul class="center">
-            <header><h5>标签云</h5></header>
-            <li><a target="_blank" href="https://phpartisan.cn/news/1.html">ubuntu搭建laravel环境</a></li>
-        </ul>
-        <ul class="right">
-            <header><h5>友链</h5></header>
-            <li >
-                <a target="_blank" href="https://ession.cn/">意行</a>
-            </li>
-        </ul>
-    </div>
-    <div class="main-footer-footer">
-        Copyright © <a>Laravel学习网 </a>| 京ICP备17031240号-2 | erarpls技术支持
-    </div>
+
 </div>
 </body>
 </html>
