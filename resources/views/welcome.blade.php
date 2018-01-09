@@ -29,7 +29,7 @@
 <body>
 <div class="main-header">
     <div class="main-header-top-line">
-        <a href="/"><img src="https://phpartisan.cn/img/logo2.png"></a>
+        <a href="/">{{ config('app.name', 'Laravel') }}</a>
         <span class="fa fa-align-center" onclick="navigation();"></span>
 
         <ul>
