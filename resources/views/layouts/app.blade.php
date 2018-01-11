@@ -9,8 +9,6 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -34,12 +32,12 @@
                         <li><a href="{{ route('register') }}">注册</a></li>
                     @else
                         <li class="dropdown">
-                            <a id="header-profile" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            <a id="profile" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->username }} <i class="fa fa-caret-down"></i>
                             </a>
 
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="header-profile">
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="profile">
                                 <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -76,9 +74,7 @@
 </header>
 
 <div class="main-content">
-    <div class="container">
-        @yield('content')
-    </div>
+    @yield('content')
 </div>
 <div class="footer">
 

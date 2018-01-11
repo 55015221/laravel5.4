@@ -9,8 +9,6 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
         .links {
@@ -30,7 +28,7 @@
 </head>
 <body>
 
-<header class="header" style="">
+<header class="header">
     <nav class="navbar navbar-static-top main-navbar" id="top">
         <div class="container">
             <div class="navbar-header">
@@ -105,6 +103,9 @@
 <div class="footer">
 
 </div>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
 
