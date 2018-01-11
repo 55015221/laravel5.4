@@ -39,6 +39,9 @@
                 <a href="/" class="navbar-brand">{{ config('app.name', 'Laravel') }}</a></div>
             <nav class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url('/home') }}">首页</a></li>
+                    <li><a href="">关于我们</a></li>
+                    <li><a href="">开源项目</a></li>
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">登录</a></li>
                         <li><a href="{{ route('register') }}">注册</a></li>
