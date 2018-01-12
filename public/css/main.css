@@ -1,89 +1,49 @@
 html, body {
-    background-color: #ebebeb;
-    background-image: url(../image/bg.jpg);
-    background-size: 100% auto;
+    background: #f5f7f9 url(../image/bg.jpg) 100%;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC" , "Hiragino Sans GB","Microsoft YaHei","微软雅黑","Open Sans", Arial, sans-serif;
+    transition: all .2s ease-in-out;
+    position: relative;
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    list-style: none;
+a {
+    color: #3091f2;
 }
 
 a:hover {
     color: #f17370;
 }
-.header {
-    padding: 20px 0 50px 0;
-    position: relative;
+.site-header {
+    background: #3091f2;
     color: #fff;
-    width: 100%;
-    max-height: 380px;
-    background-color: #3091f2;
-    background-size: 100% 1000px;
+    min-height: 60px;
+    line-height: 60px;
 }
-.header a {
+.site-header .nav a {
+    font-size: 15px;
+}
+.site-header a {
     color: #fff;
 }
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
 .nav>li>a:focus, .nav>li>a:hover{
-    color: #eee;
+    color: #bbb;
     background: none;
 }
 
-.header .jumbotron {
-    background: transparent;
-}
-
-.header .form-group {
-    position: relative;
-}
-.header .search {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    font-size: 16px;
-    padding: 13px 30px;
-    border-radius: 0;
-    height: auto;
-    text-align: center;
-    border-color: transparent;
-}
-
-.header .search-wraper {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 680px;
-    margin-top: 30px;
-    margin-bottom: 20px
-}
-
-.header .search {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    font-size: 16px;
-    padding: 13px 30px;
-    border-radius: 0;
-    height: auto;
-    text-align: left;
-    border-color: transparent
-}
-.header .fa-search {
-    position: absolute;
-    right: 10px;
-    top: 18px;
-}
-
-
-.main-content {
+.site-main {
     min-height: 540px;
-}
-.main-content .container {
-    margin: 20px auto;
-    padding: 20px auto;
+    padding: 30px 0;
 }
 
-.footer {
-    padding: 30px auto;
-    min-height: 300px;
+.site-footer {
+    padding: 30px 0;
+    width: 100%;
+    min-height: 200px;
     background: #495060;
+    color: #d2d2d2;
+    position: absolute;
+    bottom: -30px;
+}
+.site-footer .copyright {
+    text-align: center;
 }

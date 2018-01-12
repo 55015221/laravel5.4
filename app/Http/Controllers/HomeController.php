@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -21,8 +23,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $keyword = $request->get('keyword');
+        $keyword = Cache::remember('cache_' . $keyword, 30, function () use ($keyword) {
+             return $keyword;
+        });
+
+        $blade = Auth::guest() ? 'welcome' : 'home';
+
+        return view($blade, [
+            'keyword' => $keyword
+        ]);
     }
 }
