@@ -174,6 +174,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -237,6 +238,7 @@ return [
         'JWTAuth'      => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory'   => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Entrust'      => Zizaco\Entrust\EntrustFacade::class,
+        'Debugbar'     => Barryvdh\Debugbar\Facade::class,
 
     ],
 

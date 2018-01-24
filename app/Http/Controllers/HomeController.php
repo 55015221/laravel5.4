@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -30,9 +29,10 @@ class HomeController extends Controller
              return $keyword;
         });
 
-        $blade = Auth::guest() ? 'welcome' : 'home';
+        debug($keyword);
+        // $blade = Auth::guest() ? 'welcome' : 'home';
 
-        return view($blade, [
+        return view('home', [
             'keyword' => $keyword
         ]);
     }

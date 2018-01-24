@@ -1,68 +1,98 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+    <title>Login for Laravel5.4</title>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ asset('bootstrap-4.0.0/css/bootstrap.min.css') }}">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+    <!-- Custom styles for this template -->
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+        body {
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+            -ms-flex-align: center;
+            -ms-flex-pack: center;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+        .form-signin {
+            width: 100%;
+            max-width: 540px;
+        }
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+    </style>
+</head>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+<body class="text-center">
+<div class="card bg-light form-signin">
+    <div class="card-header">
+        {{ config('app.name','Laravel') }} 管理系统
+    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+    <div class="card-body">
+        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+            {{ csrf_field() }}
 
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
+            <div class="row form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <label for="email" class="col-sm-4 col-form-label">E-Mail Address</label>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-sm-6">
+                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required
+                           autofocus>
+
+                    @if ($errors->has('email'))
+                        <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+                    @endif
                 </div>
             </div>
-        </div>
+
+            <div class="row form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password" class="col-sm-4 col-form-label">Password</label>
+
+                <div class="col-sm-6">
+                    <input id="password" type="password" class="form-control" name="password" required>
+
+                    @if ($errors->has('password'))
+                        <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-6 col-sm-offset-4">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-link" href="{{ route('password.request') }}">
+                Forgot Your Password?
+            </a>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+        </form>
     </div>
 </div>
-@endsection
+</body>
+</html>

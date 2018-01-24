@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-11-14.
+    * Generated on 2018-01-22.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -74,6 +74,8 @@ namespace PHPSTORM_META {
         'entrust' => \Zizaco\Entrust\Entrust::class,
         'command.entrust.migration' => \Zizaco\Entrust\MigrationCommand::class,
         'Barryvdh\Cors\CorsService' => \Barryvdh\Cors\CorsService::class,
+        'debugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -231,6 +233,8 @@ namespace PHPSTORM_META {
         'entrust' => \Zizaco\Entrust\Entrust::class,
         'command.entrust.migration' => \Zizaco\Entrust\MigrationCommand::class,
         'Barryvdh\Cors\CorsService' => \Barryvdh\Cors\CorsService::class,
+        'debugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -388,6 +392,8 @@ namespace PHPSTORM_META {
         'entrust' => \Zizaco\Entrust\Entrust::class,
         'command.entrust.migration' => \Zizaco\Entrust\MigrationCommand::class,
         'Barryvdh\Cors\CorsService' => \Barryvdh\Cors\CorsService::class,
+        'debugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -545,6 +551,8 @@ namespace PHPSTORM_META {
         'entrust' => \Zizaco\Entrust\Entrust::class,
         'command.entrust.migration' => \Zizaco\Entrust\MigrationCommand::class,
         'Barryvdh\Cors\CorsService' => \Barryvdh\Cors\CorsService::class,
+        'debugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -702,6 +710,8 @@ namespace PHPSTORM_META {
         'entrust' => \Zizaco\Entrust\Entrust::class,
         'command.entrust.migration' => \Zizaco\Entrust\MigrationCommand::class,
         'Barryvdh\Cors\CorsService' => \Barryvdh\Cors\CorsService::class,
+        'debugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -859,6 +869,8 @@ namespace PHPSTORM_META {
         'entrust' => \Zizaco\Entrust\Entrust::class,
         'command.entrust.migration' => \Zizaco\Entrust\MigrationCommand::class,
         'Barryvdh\Cors\CorsService' => \Barryvdh\Cors\CorsService::class,
+        'debugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
@@ -1016,6 +1028,8 @@ namespace PHPSTORM_META {
         'entrust' => \Zizaco\Entrust\Entrust::class,
         'command.entrust.migration' => \Zizaco\Entrust\MigrationCommand::class,
         'Barryvdh\Cors\CorsService' => \Barryvdh\Cors\CorsService::class,
+        'debugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'cache' => \Illuminate\Cache\CacheManager::class,
         'cache.store' => \Illuminate\Cache\Repository::class,
