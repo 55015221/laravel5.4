@@ -1,7 +1,9 @@
 html, body {
-    background: #f5f7f9 url(../image/bg.jpg) 100%;
     font-family: "PingFang SC", "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Helvetica, Arial, Verdana, sans-serif;
     position: relative;
+}
+body {
+    /*background: #f5f7f9 url(../image/bg.jpg) 100%;*/
 }
 
 a {
@@ -15,10 +17,12 @@ a:hover {
     color: #f17370;
 
 }
+
 .site-header {
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05)
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
 }
-.navbar-brand{
+
+.navbar-brand {
 }
 
 .site-main {
@@ -30,9 +34,11 @@ a:hover {
     line-height: 120px;
     background: #3f464e;
 }
+
 .site-footer p {
     margin-bottom: 0;
 }
+
 .site-footer .copyright {
     text-align: center;
 }

@@ -25,10 +25,10 @@
     </div>
 
     <div class="container" style="padding: 30px 0;">
-        <div class="row mb-5">
+        <div class="row mb-3">
             <div class="card-deck">
                 <div class="card">
-                    <div class="card-header" style="height: 208px;"></div>
+                    <img class="card-img-top" src="{{ asset('image/image-background-paper.png') }}" height="200" alt="">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" style="height: 208px;"></div>
+                    <img class="card-img-top" src="{{ asset('image/image-background-paper.png') }}" height="200" alt="">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" style="height: 208px;"></div>
+                    <img class="card-img-top" src="{{ asset('image/image-background-paper.png') }}" height="200" alt="">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -57,7 +57,7 @@
         <div class="row">
             <div class="card-deck">
                 <div class="card">
-                    <div class="card-header" style="height: 208px;"></div>
+                    <img class="card-img-top" src="{{ asset('image/image-background-paper.png') }}" height="200" alt="">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" style="height: 208px;"></div>
+                    <img class="card-img-top" src="{{ asset('image/image-background-paper.png') }}" height="200" alt="">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" style="height: 208px;"></div>
+                    <img class="card-img-top" src="{{ asset('image/image-background-paper.png') }}" height="200" alt="">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
