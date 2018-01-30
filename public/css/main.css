@@ -19,7 +19,11 @@ a:hover {
 }
 
 .site-header {
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);*/
+    box-shadow: 0 0 5px 1px rgba(0,0,0,.4);
+}
+.site-header .nav-link{
+    line-height: 45px;
 }
 
 .navbar-brand {
