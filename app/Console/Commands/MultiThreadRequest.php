@@ -91,7 +91,7 @@ class MultiThreadRequest extends Command
                         $description = isset($description[1]) ? $description[1] : '';
                         $filename = basename($url);
                         Storage::put($filename, file_get_contents($url));
-                        Image::create([
+                        $id = Image::create([
                             'url'         => $url,
                             'title'       => strval($title),
                             'description' => strval($description),

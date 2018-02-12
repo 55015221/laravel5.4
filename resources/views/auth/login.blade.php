@@ -77,20 +77,20 @@
             </div>
 
             <div class="row form-group">
-                <div class="col-sm-6 col-sm-offset-4">
+                <div class="col-sm-6 offset-sm-3">
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                         </label>
-
                     </div>
+                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                        Forgot Your Password?
+                    </a>
                 </div>
             </div>
-            <a class="btn btn-link" href="{{ route('password.request') }}">
-                Forgot Your Password?
-            </a>
+
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+            <p class="mt-3 mb-1 text-muted">&copy; 2017-2018</p>
         </form>
     </div>
 </div>
